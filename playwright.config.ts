@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { defineBddProject } from 'playwright-bdd';
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 
@@ -15,15 +16,21 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'apiProject',
-      testDir: './tests/api',
+      ...defineBddProject({
+        name: 'apiProject',
+        features: './tests/api/**/*.feature',
+        steps: ['./tests/api/fixtures.ts', './tests/api/steps/**/*.ts'],
+      }),
       use: {
         baseURL: process.env.API_URL ?? 'http://localhost:8000',
       },
     },
     {
-      name: 'chromeProject',
-      testDir: './tests/ui',
+      ...defineBddProject({
+        name: 'chromeProject',
+        features: './tests/ui/**/*.feature',
+        steps: ['./tests/ui/pages/fixtures.ts', './tests/ui/steps/**/*.ts'],
+      }),
       use: {
         ...devices['Desktop Chrome'],
         baseURL: process.env.UI_URL ?? 'http://localhost:8000',

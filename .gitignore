@@ -4,6 +4,10 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/.features-gen/
+/.vscode/
+/AGENT.md
+/.copilot/
 
 # Env variables
 .env

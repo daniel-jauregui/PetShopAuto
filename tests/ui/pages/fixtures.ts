@@ -1,4 +1,4 @@
-import { test as base } from '@playwright/test';
+import { createBdd, test as base } from 'playwright-bdd';
 import { FactoryPage } from './pageFactory.js';
 import type { DocsPage } from './docs/docsPage.js';
 
@@ -12,3 +12,5 @@ export const test = base.extend<PageFixtures>({
     await use(docsPage);
   },
 });
+
+export const { Given, When, Then } = createBdd(test);
